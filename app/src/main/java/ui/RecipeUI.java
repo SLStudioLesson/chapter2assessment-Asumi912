@@ -1,6 +1,10 @@
 package ui;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,16 +66,37 @@ public class RecipeUI {
      * RecipeFileHandlerから読み込んだレシピデータを整形してコンソールに表示します。
      */
     private void displayRecipes() {
+    
+        ArrayList<String> recipeList = fileHandler.readRecipes();
 
-    }
+      //try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+       // int text;
+        //while((text = BufferedReader .read()) != -1){
+         // System.out.println(char)text);
+        //}
+   // }
+    //} else {
+       // System.out.println("No recipes available");
+//}
 
     /**
      * 設問2: 新規登録機能
      * ユーザーからレシピ名と主な材料を入力させ、RecipeFileHandlerを使用してrecipes.txtに新しいレシピを追加します。
      *
-     * @throws java.io.IOException 入出力が受け付けられない
+     * //@throws java.io.IOException 入出力が受け付けられない
      */
     private void addNewRecipe() throws IOException {
+        
+        System.out.println("レシピ名と主な材料を入力してください");
+        
+        //try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+        //    writer.write(data);
+        //} catch (IOException e){
+        //    e.printStackTrace();
+        //}
+
+
+    
 
     }
 
@@ -84,6 +109,9 @@ public class RecipeUI {
     private void searchRecipe() throws IOException {
 
     }
-
+    
 }
+
+
+//解答
 

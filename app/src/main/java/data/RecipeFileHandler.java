@@ -1,5 +1,9 @@
 package data;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,21 +18,33 @@ public class RecipeFileHandler {
         this.filePath = filePath;
     }
 
-    /**
-     * 設問1: 一覧表示機能
-     * recipes.txtからレシピデータを読み込み、それをリスト形式で返します。 <br> 
-     * IOExceptionが発生したときは<i>Error reading file: 例外のメッセージ</i>とコンソールに表示します。
-     *
-     * @return レシピデータ
-     */
+     //**
+     //* 設問1: 一覧表示機能
+     //* recipes.txtからレシピデータを読み込み、それをリスト形式で返します。 <br> 
+     //* IOExceptionが発生したときは<i>Error reading file: 例外のメッセージ</i>とコンソールに表示します。
+     //*
+     String fileName = "recipes.txt";
+ 
+     //* @return レシピデータ
+     //*/
     public ArrayList<String> readRecipes() {
-        // try {
 
-        // } catch (IOException e) {
-        //     System.out.println("Error reading file:" + e.getMessage());
-        // }
+        ArrayList<String> recipes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            //ファイルを読み込む
+        if(reader.readLine() != null) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            recipes.add(line);
+        }
+        return recipes;
+        }
+        } catch (IOException e) {
+             System.out.println("Error reading file:" + e.getMessage());
+        }
         return null;
     }
+
 
     /**
      * 設問2: 新規登録機能
@@ -40,10 +56,15 @@ public class RecipeFileHandler {
      */
      // 
     public void addRecipe(String recipeName, String ingredients) {
-        // try {
+        ArrayList<String> arrayList = new ArrayList<>();
+        // try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+        //      writer.write(data);
 
-        // } catch (IOException e) {
+        //} catch (IOException e) {
+        //    System.out.println("Error reading file:" + e.getMessage());
+        //} finally {
+        //    System.out.println("Recipe added successfully.");
 
-        // }
     }
-}
+    }
+//解答
