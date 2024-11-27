@@ -18,53 +18,57 @@ public class RecipeFileHandler {
         this.filePath = filePath;
     }
 
-     //**
-     //* 設問1: 一覧表示機能
-     //* recipes.txtからレシピデータを読み込み、それをリスト形式で返します。 <br> 
-     //* IOExceptionが発生したときは<i>Error reading file: 例外のメッセージ</i>とコンソールに表示します。
-     //*
-     String fileName = "recipes.txt";
- 
-     //* @return レシピデータ
-     //*/
+    // **
+    // * 設問1: 一覧表示機能
+    // * recipes.txtからレシピデータを読み込み、それをリスト形式で返します。 <br>
+    // * IOExceptionが発生したときは<i>Error reading file: 例外のメッセージ</i>とコンソールに表示します。
+    // *
+    String fileName = "recipes.txt";
+
+    // * @return レシピデータ
+    // */
     public ArrayList<String> readRecipes() {
 
         ArrayList<String> recipes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            //ファイルを読み込む
-        if(reader.readLine() != null) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            recipes.add(line);
-        }
-        return recipes;
-        }
+            // ファイルを読み込む
+            if (reader.readLine() != null) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    recipes.add(line);
+                }
+
+            }
+            return recipes;
         } catch (IOException e) {
-             System.out.println("Error reading file:" + e.getMessage());
+            System.out.println("Error reading file:" + e.getMessage());
         }
         return null;
     }
-
 
     /**
      * 設問2: 新規登録機能
      * 新しいレシピをrecipes.txtに追加します。<br>
      * レシピ名と材料はカンマ区切りで1行としてファイルに書き込まれます。
      *
-     * @param recipeName レシピ名
+     * @param recipeName  レシピ名
      * @param ingredients 材料名
      */
-     // 
+    //
     public void addRecipe(String recipeName, String ingredients) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        // try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-        //      writer.write(data);
+        try {
+            ingredients = ingredients.replace(",", ", ");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
+            writer.write(recipeName + ", " + ingredients);
+            writer.newLine();
+            writer.close();
 
-        //} catch (IOException e) {
-        //    System.out.println("Error reading file:" + e.getMessage());
-        //} finally {
-        //    System.out.println("Recipe added successfully.");
+        } catch (IOException e) {
+            System.out.println("Error reading file:" + e.getMessage());
+        } finally {
+            System.out.println("Recipe added successfully.");
 
+        }
     }
-    }
-//解答
+}
+// 解答

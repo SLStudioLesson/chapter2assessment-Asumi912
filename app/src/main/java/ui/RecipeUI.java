@@ -41,9 +41,11 @@ public class RecipeUI {
                 switch (choice) {
                     case "1":
                         // 設問1: 一覧表示機能
+                        displayRecipes();
                         break;
                     case "2":
                         // 設問2: 新規登録機能
+                        addNewRecipe();
                         break;
                     case "3":
                         // 設問3: 検索機能
@@ -66,18 +68,23 @@ public class RecipeUI {
      * RecipeFileHandlerから読み込んだレシピデータを整形してコンソールに表示します。
      */
     private void displayRecipes() {
-    
+
         ArrayList<String> recipeList = fileHandler.readRecipes();
 
-      //try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-       // int text;
-        //while((text = BufferedReader .read()) != -1){
-         // System.out.println(char)text);
-        //}
-   // }
-    //} else {
-       // System.out.println("No recipes available");
-//}
+        // レシピリストがnullのとき
+        // レシピリストが0だったとき
+        if (recipeList == null || recipeList.size() == 0) {
+            System.out.println("No recipes available");
+        }
+        // System.out.println(recipeList);
+        for(String recipe : recipeList) {
+            String[] str = recipe.split(",", 2);
+            System.out.println("Recipe Name: " + str[0]);
+            System.out.println("Main Ingredients: " + str[1]);
+            System.out.println("=================");
+        }
+
+    }
 
     /**
      * 設問2: 新規登録機能
@@ -87,16 +94,22 @@ public class RecipeUI {
      */
     private void addNewRecipe() throws IOException {
         
-        System.out.println("レシピ名と主な材料を入力してください");
-        
-        //try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-        //    writer.write(data);
-        //} catch (IOException e){
-        //    e.printStackTrace();
-        //}
-
-
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            String inputRecipeName = "";
+            String inputIngredients = "";
+        try {
+            System.out.println("Enter recipe name: ");
+            inputRecipeName = reader.readLine();
+            System.out.print("Enter main ingredients (comma separated): ");
+            inputIngredients = reader.readLine();
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
     
+        fileHandler = new RecipeFileHandler();
+        fileHandler.addRecipe(inputRecipeName,  inputIngredients);
+
+        System.out.println("Recipe added successfully");
 
     }
 
@@ -109,9 +122,7 @@ public class RecipeUI {
     private void searchRecipe() throws IOException {
 
     }
-    
+
 }
 
-
-//解答
-
+// 解答
